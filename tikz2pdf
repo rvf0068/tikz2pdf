@@ -158,9 +158,9 @@ class TikZ2PDF(object):
             return_code = p.wait()
             if return_code:
                 self.log.error("Error: %s failed to compile. Last 10 lines of output:", self.arguments['bin'])
-                print
+                print()
                 try:
-                    print '\n'.join(p.communicate()[0].split('\n')[-10:])
+                    print('\n'.join(p.communicate()[0].split('\n')[-10:]))
                 except:
                     pass
                 return
