@@ -194,7 +194,7 @@ class TikZ2PDF(object):
         arguments = {}
         for config in configs:
             if os.path.isfile(config):
-                with open(config, 'rb') as f:
+                with open(config, 'r') as f:
                     arguments.update(self.read_arguments_from_file(f))
             else:
                 self.log.debug("File %s not found", config)
