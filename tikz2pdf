@@ -64,7 +64,7 @@ class TikZ2PDF(object):
         self.log.info("Waiting for changes...")
         while True:
             current_mtimes = self.get_mtimes()
-            if set(current_mtimes.iteritems()) - set(self.previous_mtimes.iteritems()):
+            if set(current_mtimes.items()) - set(self.previous_mtimes.items()):
                 self.previous_mtimes = current_mtimes
                 break
             sleep(0.1)
@@ -80,7 +80,7 @@ class TikZ2PDF(object):
 
     def process(self, **command_line_arguments):
         self.arguments = self.get_arguments(**command_line_arguments)
-        for k,v in self.arguments.iteritems():
+        for k,v in self.arguments.items():
             self.log.debug("Parameter '%s' is set to '%s'", k, v)
 
         # Load tikz
