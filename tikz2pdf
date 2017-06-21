@@ -118,7 +118,7 @@ class TikZ2PDF(object):
             self.template_dir = os.path.abspath(os.path.dirname(template_filename))
             self.log.debug("Reading template from %s ", os.path.abspath(template_filename))
             self.arguments['template'].close()
-            self.arguments['template'] = open(template_filename, 'rb')
+            self.arguments['template'] = open(template_filename, 'r')
             template_tex = self.arguments['template'].read()
             try:
                 template_tex.index('%tikz2pdf-tikz')
@@ -144,7 +144,7 @@ class TikZ2PDF(object):
 
     def get_tikz(self):
         self.tikz_file.close()
-        self.tikz_file = open(self.tikz_filename, 'rb')
+        self.tikz_file = open(self.tikz_filename, 'r')
         return self.tikz_file.read()
 
 
@@ -177,7 +177,7 @@ class TikZ2PDF(object):
         parser.add_argument('--include-directory', action='append')
         parser.add_argument('--number', type=int)
         parser.add_argument('--output', type=str)
-        parser.add_argument('--template', type=argparse.FileType('rb')) 
+        parser.add_argument('--template', type=argparse.FileType('r')) 
         parser.add_argument('--xelatex', action='store_const', const='xelatex', dest='bin')
         parser.add_argument('--pdflatex', action='store_const', const='pdflatex', dest='bin')
         parser.add_argument('--preview', action='store_true')
@@ -242,7 +242,7 @@ class TikZ2PDF(object):
 
 def main():
     parser = argparse.ArgumentParser(description="tikz2pdf - compile TikZ to PDF", argument_default=argparse.SUPPRESS)
-    parser.add_argument('tikz_files', nargs='*', type=argparse.FileType('rb'), default=sys.stdin, help="TikZ file(s)", metavar="TIKZ")
+    parser.add_argument('tikz_files', nargs='*', type=argparse.FileType('r'), default=sys.stdin, help="TikZ file(s)", metavar="TIKZ")
     parser.add_argument('-b', '--bin', type=str, help="binary to use for compiling (default: pdflatex)")
     parser.add_argument('-d', '--debug', action='store_true', default=False, help="print debug information")
     parser.add_argument('-e', '--edit', action='store_true', default=False, help="open TikZ file in default editor")
@@ -252,7 +252,7 @@ def main():
     parser.add_argument('-o', '--output', nargs='*', type=str, help="output PDF file or directory (with trailing slash)", metavar="PDF")
     parser.add_argument('-p', '--pdflatex', action='store_const', const='pdflatex', dest='bin', help="use pdflatex as compiler")
     parser.add_argument('-q', '--quiet', action='store_true', default=False, help="suppress compiler output")
-    parser.add_argument('-t', '--template', type=argparse.FileType('rb'), help="LaTeX file to use as template", metavar="TEX") 
+    parser.add_argument('-t', '--template', type=argparse.FileType('r'), help="LaTeX file to use as template", metavar="TEX") 
     parser.add_argument('-v', '--view', action='store_true', default=False, help="open PDF file in default viewer")
     parser.add_argument('-w', '--watch', action='store_true', default=False, help="recompile when TikZ file or template has changed")
     parser.add_argument('-x', '--xelatex', action='store_const', const='xelatex', dest='bin', help="use xelatex as compiler")
