@@ -85,7 +85,7 @@ class TikZ2PDF(object):
 
         # Load tikz
         tikz_tex = self.get_tikz()
-        if r'\documentclass' in tikz_tex:
+        if '\documentclass' in tikz_tex:
             final_tex = tikz_tex
         else:
             # Load template
